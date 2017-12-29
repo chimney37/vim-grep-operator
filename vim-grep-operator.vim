@@ -18,6 +18,7 @@ function! GrepOperator(type)
     elseif a:type ==# 'char'
         normal! `[v`]y
     elseif a:type ==# 'V'
+        "h is to not include ^@ (null character).
         normal! `<v`>hy
     else
         return
