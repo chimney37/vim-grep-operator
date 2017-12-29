@@ -2,8 +2,8 @@
 " try out function with <localleader>giw (grep inside word)
 " operatorfunc specifies a function to be called by the g@ operator.
 nnoremap <localleader>g :set operatorfunc=GrepOperator<cr>g@
-" note: in visual mode, <c-u> is used to delete from the cursor to the beginning.
-" without it, : in visual mode will append '<,'> which is the range of the
+" note: in visual mode, <c-u> is used to delete from the cursor to the beginning of the command line.
+" without it, : in visual mode will append '<,'> to the command line which is the range of the
 " visually selected text. visualmode() is a built in vim function that returns
 " one-character representing the last type of visual mode used. "v" for
 " characterwise, "v" for linewise, ctrl-v character for blockwise. 
