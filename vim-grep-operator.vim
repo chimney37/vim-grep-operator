@@ -1,4 +1,4 @@
-" steve losh's grep plugin
+" Modified vesrion of steve losh's grep plugin
 " try out function with <localleader>giw (grep inside word)
 " operatorfunc specifies a function to be called by the g@ operator.
 nnoremap <localleader>g :set operatorfunc=GrepOperator<cr>g@
