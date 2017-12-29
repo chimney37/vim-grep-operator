@@ -1,7 +1,7 @@
 " Modified vesrion of steve losh's grep plugin
 " try out function with <localleader>giw (grep inside word)
 " operatorfunc specifies a function to be called by the g@ operator.
-nnoremap <localleader>g :set operatorfunc=GrepOperator<cr>g@
+nnoremap <localleader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 " note: in visual mode, <c-u> is used to delete from the cursor to the beginning of the command line.
 " without it, : in visual mode will append '<,'> to the command line which is the range of the
 " visually selected text. visualmode() is a built in vim function that returns
@@ -9,10 +9,12 @@ nnoremap <localleader>g :set operatorfunc=GrepOperator<cr>g@
 " characterwise, "v" for linewise, ctrl-v character for blockwise. 
 " pressing <localleader>giw echoes char, 
 " pressing <localleader>gg echoes line
-vnoremap <localleader>g :<c-u>call GrepOperator(visualmode())<cr>
+vnoremap <localleader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 
-function! GrepOperator(type)
+function! s:GrepOperator(type)
     "echom a:type
+    " save the contents of the unnamed register before we yank
+    let saved_unnamed_register = @@
     if a:type ==# 'v'
         normal! `<v`>y
     elseif a:type ==# 'char'
@@ -29,6 +31,8 @@ function! GrepOperator(type)
     " :help :silent mentions sometimes screen messes up after external
     " command. use redraw function to redraw. ! clears first.
     redr!
+    " restore the contents of the unnamed register 
+    let @@ = saved_unnamed_register 
 endfunction
 
 " Useful commands
